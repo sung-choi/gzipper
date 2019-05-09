@@ -75,11 +75,12 @@ class Gzipper {
           )
         } else if (isFile) {
 
-          const extensionsRegexp = /^.*\.(js|css|scss|html|xhtml|htm|xml|json|yml|map)$/i;
+          const regex = /^.*\.(js|css|scss|html|xhtml|htm|xml|json|yml|map)$/i;
+          const ext = path.extname(filePath);
 
           try {
             if (
-              extensionsRegexp.test(path.extname(filepath))
+              regex.test(ext)
             ) {
               const hrtimeStart = process.hrtime()
               compressedFiles.push(filePath)
