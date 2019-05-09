@@ -74,10 +74,12 @@ class Gzipper {
             ...(await this[compileFolderRecursively](filePath))
           )
         } else if (isFile) {
+
+          const extensionsRegexp = /^.*\.(js|css|scss|html|xhtml|htm|xml|json|yml|map)$/i;
+
           try {
             if (
-              path.extname(filePath) === '.js' ||
-              path.extname(filePath) === '.css'
+              extensionsRegexp.test(path.extname(filepath))
             ) {
               const hrtimeStart = process.hrtime()
               compressedFiles.push(filePath)
@@ -177,7 +179,7 @@ class Gzipper {
       )
     } else {
       this.logger.warn(
-        `we couldn't find any appropriate files (.css, .js).`,
+        `we couldn't find any appropriate files`,
         true
       )
     }
